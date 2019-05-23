@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : postgis
 Version  : 2.5.2
-Release  : 1
+Release  : 2
 URL      : https://download.osgeo.org/postgis/source/postgis-2.5.2.tar.gz
 Source0  : https://download.osgeo.org/postgis/source/postgis-2.5.2.tar.gz
 Summary  : Adds support for geographic objects to PostgreSQL
@@ -17,12 +17,14 @@ Requires: postgis-lib = %{version}-%{release}
 Requires: postgis-license = %{version}-%{release}
 BuildRequires : CUnit-dev
 BuildRequires : ImageMagick
+BuildRequires : SFCGAL-dev
 BuildRequires : bison
 BuildRequires : flex
 BuildRequires : gdal-dev
 BuildRequires : geos-dev
 BuildRequires : grep
 BuildRequires : json-c-dev
+BuildRequires : jsoncpp-dev
 BuildRequires : libxml2-dev
 BuildRequires : libxslt-bin
 BuildRequires : pcre-dev
@@ -115,16 +117,16 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1558517009
+export SOURCE_DATE_EPOCH=1558569870
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
 export FFLAGS="$CFLAGS -fno-lto "
 export CXXFLAGS="$CXXFLAGS -fno-lto "
 %configure
-make
+make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1558517009
+export SOURCE_DATE_EPOCH=1558569870
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/postgis
 cp COPYING %{buildroot}/usr/share/package-licenses/postgis/COPYING
@@ -159,7 +161,9 @@ cp extras/tiger_geocoder/COPYING %{buildroot}/usr/share/package-licenses/postgis
 /usr/share/postgresql/contrib/postgis-2.5/rtpostgis_proc_set_search_path.sql
 /usr/share/postgresql/contrib/postgis-2.5/rtpostgis_upgrade.sql
 /usr/share/postgresql/contrib/postgis-2.5/rtpostgis_upgrade_for_extension.sql
+/usr/share/postgresql/contrib/postgis-2.5/sfcgal.sql
 /usr/share/postgresql/contrib/postgis-2.5/sfcgal_comments.sql
+/usr/share/postgresql/contrib/postgis-2.5/sfcgal_upgrade.sql
 /usr/share/postgresql/contrib/postgis-2.5/spatial_ref_sys.sql
 /usr/share/postgresql/contrib/postgis-2.5/topology.sql
 /usr/share/postgresql/contrib/postgis-2.5/topology_comments.sql
@@ -167,6 +171,7 @@ cp extras/tiger_geocoder/COPYING %{buildroot}/usr/share/package-licenses/postgis
 /usr/share/postgresql/contrib/postgis-2.5/uninstall_legacy.sql
 /usr/share/postgresql/contrib/postgis-2.5/uninstall_postgis.sql
 /usr/share/postgresql/contrib/postgis-2.5/uninstall_rtpostgis.sql
+/usr/share/postgresql/contrib/postgis-2.5/uninstall_sfcgal.sql
 /usr/share/postgresql/contrib/postgis-2.5/uninstall_topology.sql
 /usr/share/postgresql/extension/address_standardizer--1.0--2.5.2.sql
 /usr/share/postgresql/extension/address_standardizer--2.5.2--2.5.2next.sql
@@ -233,6 +238,60 @@ cp extras/tiger_geocoder/COPYING %{buildroot}/usr/share/package-licenses/postgis
 /usr/share/postgresql/extension/postgis--ANY--2.5.2.sql
 /usr/share/postgresql/extension/postgis--unpackaged--2.5.2.sql
 /usr/share/postgresql/extension/postgis.control
+/usr/share/postgresql/extension/postgis_sfcgal--2.0.0--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.0.1--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.0.2--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.0.3--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.0.4--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.0.5--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.0.6--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.0.7--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.1.0--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.1.1--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.1.2--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.1.3--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.1.4--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.1.5--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.1.6--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.1.7--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.1.8--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.1.9--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.2.0--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.2.1--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.2.2--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.2.3--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.2.4--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.2.5--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.2.6--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.2.7--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.2.8--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.3.0--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.3.1--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.3.2--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.3.3--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.3.4--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.3.5--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.3.6--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.3.7--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.3.8--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.3.9--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.4.0--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.4.1--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.4.2--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.4.3--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.4.4--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.4.5--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.4.6--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.4.7--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.5.0--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.5.1--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.5.2--2.5.2next.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.5.2dev--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--2.5.2next--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--ANY--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal--unpackaged--2.5.2.sql
+/usr/share/postgresql/extension/postgis_sfcgal.control
 /usr/share/postgresql/extension/postgis_tiger_geocoder--2.0.0--2.5.2.sql
 /usr/share/postgresql/extension/postgis_tiger_geocoder--2.0.1--2.5.2.sql
 /usr/share/postgresql/extension/postgis_tiger_geocoder--2.0.2--2.5.2.sql

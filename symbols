@@ -1,9 +1,11 @@
 liblwgeom-2.5.so.0:GBOX2GEOS
 liblwgeom-2.5.so.0:GEOS2LWGEOM
 liblwgeom-2.5.so.0:LWGEOM2GEOS
+liblwgeom-2.5.so.0:LWGEOM2SFCGAL
 liblwgeom-2.5.so.0:LWGEOM_GEOS_buildArea
 liblwgeom-2.5.so.0:LWGEOM_GEOS_getPointN
 liblwgeom-2.5.so.0:LWGEOM_GEOS_makeValid
+liblwgeom-2.5.so.0:SFCGAL2LWGEOM
 liblwgeom-2.5.so.0:UF_create
 liblwgeom-2.5.so.0:UF_destroy
 liblwgeom-2.5.so.0:UF_find
@@ -424,6 +426,8 @@ liblwgeom-2.5.so.0:lwgeom_set_effective_area
 liblwgeom-2.5.so.0:lwgeom_set_geodetic
 liblwgeom-2.5.so.0:lwgeom_set_handlers
 liblwgeom-2.5.so.0:lwgeom_set_srid
+liblwgeom-2.5.so.0:lwgeom_sfcgal_noop
+liblwgeom-2.5.so.0:lwgeom_sfcgal_version
 liblwgeom-2.5.so.0:lwgeom_sharedpaths
 liblwgeom-2.5.so.0:lwgeom_simplify
 liblwgeom-2.5.so.0:lwgeom_simplify_in_place

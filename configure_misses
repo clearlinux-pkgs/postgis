@@ -2,7 +2,6 @@ Configure miss: dblatex
 Configure miss: libiconv_open in -liconv
 Configure miss: iconvctl
 Configure miss: libiconvctl
-Configure miss: sfcgal-config
 Configure miss: json/json.h usability
 Configure miss: json/json.h presence
 Configure miss: json/json.h

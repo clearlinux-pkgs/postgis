@@ -1,11 +1,13 @@
 2.5.2
 CUnit-dev
 ImageMagick
+SFCGAL-dev
 bison
 flex
 gdal-dev
 geos-dev
 json-c-dev
+jsoncpp-dev
 libxml2-dev
 libxslt-bin
 pcre-dev
