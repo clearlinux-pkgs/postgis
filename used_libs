@@ -1,11 +1,11 @@
 libSFCGAL.so.1
 libc.so.6
-libgdal.so.20
+libgdal.so.26
 libgeos_c.so.1
 libjson-c.so.4
 libm.so.6
 libpcre.so.1
 libpq.so.5
-libproj.so.13
+libproj.so.15
 libprotobuf-c.so.1
 libxml2.so.2

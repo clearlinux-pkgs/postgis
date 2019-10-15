@@ -5,12 +5,12 @@
 %define keepstatic 1
 Name     : postgis
 Version  : 2.5.2
-Release  : 4
+Release  : 5
 URL      : https://download.osgeo.org/postgis/source/postgis-2.5.2.tar.gz
 Source0  : https://download.osgeo.org/postgis/source/postgis-2.5.2.tar.gz
 Summary  : Adds support for geographic objects to PostgreSQL
 Group    : Development/Tools
-License  : GPL-2.0
+License  : CC-BY-2.5 GPL-2.0 MIT
 Requires: postgis-bin = %{version}-%{release}
 Requires: postgis-data = %{version}-%{release}
 Requires: postgis-lib = %{version}-%{release}
@@ -67,7 +67,6 @@ Requires: postgis-bin = %{version}-%{release}
 Requires: postgis-data = %{version}-%{release}
 Provides: postgis-devel = %{version}-%{release}
 Requires: postgis = %{version}-%{release}
-Requires: postgis = %{version}-%{release}
 
 %description dev
 dev components for the postgis package.
@@ -103,7 +102,6 @@ license components for the postgis package.
 Summary: staticdev components for the postgis package.
 Group: Default
 Requires: postgis-dev = %{version}-%{release}
-Requires: postgis-dev = %{version}-%{release}
 
 %description staticdev
 staticdev components for the postgis package.
@@ -116,8 +114,9 @@ staticdev components for the postgis package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1558569870
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1571110453
+export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
 export FFLAGS="$CFLAGS -fno-lto "
@@ -126,11 +125,13 @@ export CXXFLAGS="$CXXFLAGS -fno-lto "
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1558569870
+export SOURCE_DATE_EPOCH=1571110453
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/postgis
-cp COPYING %{buildroot}/usr/share/package-licenses/postgis/COPYING
-cp extras/tiger_geocoder/COPYING %{buildroot}/usr/share/package-licenses/postgis/extras_tiger_geocoder_COPYING
+cp %{_builddir}/postgis-2.5.2/COPYING %{buildroot}/usr/share/package-licenses/postgis/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/postgis-2.5.2/extensions/address_standardizer/COPYING %{buildroot}/usr/share/package-licenses/postgis/72a08efb60f0505073eef690c6612036bd7e0697
+cp %{_builddir}/postgis-2.5.2/extras/tiger_geocoder/COPYING %{buildroot}/usr/share/package-licenses/postgis/dc8f2e570bf431427dbc3bab9d4d551b53a60208
+cp %{_builddir}/postgis-2.5.2/postgis/vector_tile.LICENSE %{buildroot}/usr/share/package-licenses/postgis/644a450c6de6d9bd6f346b08a5fc35c887a22847
 %make_install
 
 %files
@@ -403,7 +404,8 @@ cp extras/tiger_geocoder/COPYING %{buildroot}/usr/share/package-licenses/postgis
 
 %files dev
 %defattr(-,root,root,-)
-/usr/include/*.h
+/usr/include/liblwgeom.h
+/usr/include/liblwgeom_topo.h
 /usr/lib64/liblwgeom.so
 
 %files doc
@@ -421,8 +423,10 @@ cp extras/tiger_geocoder/COPYING %{buildroot}/usr/share/package-licenses/postgis
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/postgis/COPYING
-/usr/share/package-licenses/postgis/extras_tiger_geocoder_COPYING
+/usr/share/package-licenses/postgis/4cc77b90af91e615a64ae04893fdffa7939db84c
+/usr/share/package-licenses/postgis/644a450c6de6d9bd6f346b08a5fc35c887a22847
+/usr/share/package-licenses/postgis/72a08efb60f0505073eef690c6612036bd7e0697
+/usr/share/package-licenses/postgis/dc8f2e570bf431427dbc3bab9d4d551b53a60208
 
 %files staticdev
 %defattr(-,root,root,-)
