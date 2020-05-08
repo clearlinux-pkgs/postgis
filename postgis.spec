@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : postgis
 Version  : 2.5.2
-Release  : 8
+Release  : 9
 URL      : https://download.osgeo.org/postgis/source/postgis-2.5.2.tar.gz
 Source0  : https://download.osgeo.org/postgis/source/postgis-2.5.2.tar.gz
 Summary  : No detailed summary available
@@ -116,7 +116,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1588615662
+export SOURCE_DATE_EPOCH=1588975730
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -126,7 +126,7 @@ export CXXFLAGS="$CXXFLAGS -fno-lto "
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1588615662
+export SOURCE_DATE_EPOCH=1588975730
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/postgis
 cp %{_builddir}/postgis-2.5.2/COPYING %{buildroot}/usr/share/package-licenses/postgis/4cc77b90af91e615a64ae04893fdffa7939db84c
