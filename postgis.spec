@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : postgis
 Version  : 2.5.2
-Release  : 10
+Release  : 11
 URL      : https://download.osgeo.org/postgis/source/postgis-2.5.2.tar.gz
 Source0  : https://download.osgeo.org/postgis/source/postgis-2.5.2.tar.gz
 Summary  : No detailed summary available
