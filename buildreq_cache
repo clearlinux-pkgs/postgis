@@ -1,15 +1,10 @@
-2.5.2
-CUnit-dev
+3.3.2
 ImageMagick
 SFCGAL-dev
 bison
 flex
 gdal-dev
 geos-dev
-json-c-dev
-jsoncpp-dev
-libxml2-dev
 libxslt-bin
-pcre-dev
 postgresql-dev
 proj-dev

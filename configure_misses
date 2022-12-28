@@ -1,7 +1,12 @@
+Configure miss: 32-bit host C ABI
+Configure miss: CFLocaleCopyPreferredLanguages
 Configure miss: dblatex
-Configure miss: libiconv_open in -liconv
 Configure miss: iconvctl
+Configure miss: libiconv_open in -liconv
 Configure miss: libiconvctl
-Configure miss: json/json.h usability
-Configure miss: json/json.h presence
-Configure miss: json/json.h
+Configure miss: main in -lc++
+Configure miss: proj_api.h
+Configure miss: proj_api.h presence
+Configure miss: proj_api.h usability
+Configure miss: whether we are using Clang
+Configure miss: xml2pot
