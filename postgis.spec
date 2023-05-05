@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : postgis
 Version  : 3.3.2
-Release  : 12
+Release  : 13
 URL      : https://download.osgeo.org/postgis/source/postgis-3.3.2.tar.gz
 Source0  : https://download.osgeo.org/postgis/source/postgis-3.3.2.tar.gz
 Summary  : No detailed summary available
