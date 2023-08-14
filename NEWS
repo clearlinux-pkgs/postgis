@@ -1,3 +1,40 @@
+PostGIS 3.3.3
+2023/05/29
+
+* Bug Fixes and Enhancements *
+  - #5384, Fix crash in ST_AsGML when given id is longer than given prefix
+           (Sandro Santilli)
+  - #5380, Fix 2.5 upgrades with views using geography based ST_Distance
+           (Sandro Santilli)
+  - #5303, Don't try removing closed edges endpoint from
+           RemoveUnusedPrimitives (Sandro Santilli)
+  - #5289, Fix misleading message in RemoveUnusedPrimitives about
+           doubly connected edges healing (Sandro Santilli)
+  - #5298, Fix CopyTopology exception with hierarchical layers (Sandro Santilli)
+  - #5299, Corrections to address_standardizer_data_us lex (Regina Obe)
+  - #5106, Fix segfault in ST_RemEdgeNewFace/ST_RemEdgeModFace
+           when no edge side-faces are found (Sandro Santilli)
+  - #5329, Fix downgrade protection introduced in 3.3.0 (Sandro Santilli)
+  - #5332, Keep proj errors from percolating into PgSQL log (Paul Ramsey)
+  - #5313, Fix memory access issue in ST_InterpolateRaster (Paul Ramsey)
+  - #5338, Dump/Restore of raster table fails on
+           enforce_coverage_tile_rast constraint (Regina Obe)
+  - #5315, #5318, #5319, #5320, #5342 crashes on infinite coordinates
+          (Regina Obe, Paul Ramsey)
+  - #5344, Include topology id sequence state in dumps (Sandro Santilli)
+  - #5288, ST_LineCrossingDirection multi-cross error (Paul Ramsey)
+  - #5347, _ST_BestSRID crashes on ARM with infinite geometries (Regina Obe)
+  - #5331, [postgis_tiger_geocoder] reverse_geocode, prefer addressable ranges
+          (Regina Obe, Locance)
+  - #5363, Make ST_ClusterDBScan interruptable (Paul Ramsey)
+  - #5257, #5261, #5277, #5304, #5308, #5374, Support for PG16
+          (Paul Ramsey, Regina Obe, Sandro , Laurenz Albe)
+  - #5371, ST_Union segfaults (PG 11-12) (Regina Obe)
+  - #5378, ST_Buffer(geography) drops SRID (Paul Ramsey)
+  - #5388, [postgis_tiger_geocoder] Fix faces table tiger_gload,
+           caused census rerelease of faces data (Regina Obe)
+
+
 PostGIS 3.3.2
 2022/11/12
 This version requires PostgreSQL 11-15, GEOS 3.6 or higher, and Proj 5.2+
@@ -63,7 +100,7 @@ Use below to enable it.
  * Breaking changes *
   - Drop support for PostgreSQL 9.6 and 10 (Regina Obe)
   - Change output for WKT MULTIPOINT. All points now
-    wrapped in parens. (Even Roualt)
+    wrapped in parens. (Even Rouault)
   - GH674, geometry validation and fixing is disabled
     for ST_DumpAsPolygons and ST_Polygon so it works faster
     but might produce invalid polygons. (Aliaksandr Kalenik)
@@ -760,7 +797,7 @@ PostGIS 2.5.2
            (Darafei Praliaskouski, Arthur Lesuisse, Andrew Gierth, Raúl Marín)
   - #4262, Document MULTISURFACE compatibility of ST_LineToCurve (Steven Ottens)
   - #4267, Enable Proj 6 deprecated APIs (Darafei Praliaskouski, Raúl Marín)
-  - #4276, ST_AsGeoJSON documentation refresh (Darafei Praliaskouski)￼
+  - #4276, ST_AsGeoJSON documentation refresh (Darafei Praliaskouski)
   - #4273, Tighter parsing of WKT (Paul Ramsey)
   - #4292, ST_AsMVT: parse JSON numeric values with decimals as doubles (Raúl Marín)
   - #4300, ST_AsMVTGeom: Always return the simplest geometry (Raúl Marín)

@@ -1,111 +1,122 @@
-2022-11-13  Regina Obe <lr@pcorp.us>
+2023-05-29  Regina Obe <lr@pcorp.us>
 
-	* NEWS, README.postgis: Minor edits, stamp version on README
+	* ci/winnie/build_postgis.sh, ci/winnie/package_postgis.sh,
+	ci/winnie/regress_postgis.sh: Update versions of windows packages,
+	and ship projsync.exe
 
-2022-11-13  Regina Obe <lr@pcorp.us>
+2023-05-29  Regina Obe <lr@pcorp.us>
 
-	* NEWS: Change release date to 11/12 to appease news checker on
-	berries
+	* NEWS, README.postgis, Version.config, doc/release_notes.xml,
+	extensions/upgradeable_versions.mk: Prep for PostGIS 3.3.3 release
 
-2022-11-13  Regina Obe <lr@pcorp.us>
+2023-05-28  Regina Obe <lr@pcorp.us>
 
-	* HOWTO_RELEASE, NEWS, Version.config, doc/release_notes.xml,
-	extensions/upgradeable_versions.mk: Prep for PostGIS 3.3.2 release
+	* regress/core/tickets.sql, regress/core/tickets_expected: Add test
+	for PostGIS 3.3.3 References #5378
 
-2022-11-10  Regina Obe <lr@pcorp.us>
+2023-05-24  Regina Obe <lr@pcorp.us>
 
-	* NEWS, raster/rt_core/rt_raster.c,
-	raster/test/regress/rt_asraster.sql,
-	raster/test/regress/rt_asraster_expected: Fix bad rasterization of
-	linestring (Gilles Vuidel) References #5084  for PostGIS 3.3.2
+	* NEWS, extras/tiger_geocoder/tiger_loader_2022.sql: Fix tiger 2022
+	 faces load - Add uace20 to exclusions column list References #5388 for PostGIS 3.3.3
 
-2022-11-09  Regina Obe <lr@pcorp.us>
+2023-05-17  Sandro Santilli <strk@kbt.io>
 
-	* NEWS, liblwgeom/lwgeom_sfcgal.c: Specify geometry type when SFCGAL
-	can't process.  Closes #4988 for PostGIS 3.3.2
+	* postgis/geography_inout.c: Fix write past end of block in GML
+	output References #5384 in 3.3 branch (3.3.3dev)
 
-2022-11-08  Sandro Santilli <strk@kbt.io>
+2023-05-17  Sandro Santilli <strk@kbt.io>
 
-	* NEWS, topology/loader/pgtopo_export,
-	topology/loader/pgtopo_import: Allow import/export of topologies
-	with names needing quoting Closes #5285 in stable-3.3 branch (3.3.2dev)
+	* NEWS, postgis/geography_inout.c, regress/core/out_gml.sql,
+	regress/core/out_gml_expected, regress/core/tests.mk.in: Fix crash
+	in ST_AsGML when given id is longer than given prefix Includes regress test.  References #5384 in 3.3 branch (3.3.3dev)
 
-2022-11-07  Regina Obe <lr@pcorp.us>
+2023-05-09  Sandro Santilli <strk@kbt.io>
 
-	* ci/winnie/package_postgis.sh: Copy topology loadar/dumpter into
-	the postgresql bin folder
+	* regress/core/regress_buffer_params.sql,
+	regress/core/regress_buffer_params_expected: Normalize GEOS
+	polygonal results from Buffer ops
 
-2022-11-05  Regina Obe <lr@pcorp.us>
+2023-05-09  Sandro Santilli <strk@kbt.io>
 
-	* NEWS: [skip ci] Fix typo in news.
+	* regress/core/offsetcurve.sql: Ignore collinear vertices in
+	offsetcurve Fixes a failure with newer GEOS code which results in an additional
+	vertex (collinear to the existing segment).
 
-2022-11-05  Regina Obe <lr@pcorp.us>
+2023-05-12  Sandro Santilli <strk@kbt.io>
 
-	* NEWS, extensions/postgis_tiger_geocoder/Makefile.in,
-	extras/tiger_geocoder/tiger_loader_2022.sql: Update
-	postgis_tiger_geocoder to work with TIGER 2022 files Closes #5244
-	for PostGIS 3.3.2
+	* regress/hooks/hook-after-upgrade.sql: Fix upgrade test by dropping
+	deprecated function after upgrade
 
-2022-11-03  Louis Descoteaux <ld@celertech.ca>
+2023-05-12  Sandro Santilli <strk@kbt.io>
 
-	* NEWS, topology/Makefile.in: Fix topology install on Alpine Move include $(PGXS) and use := for LIBTOOL References #5264 in 3.3
-	branch (3.3.2dev)
+	* NEWS, postgis/geography.sql.in,
+	postgis/postgis_after_upgrade.sql,
+	regress/hooks/hook-after-upgrade.sql,
+	regress/hooks/hook-before-upgrade.sql: Fix 2.5 upgrades with views
+	using geography based ST_Distance Include tests References #5380 in 3.3 branch (3.3.3dev)
 
-2022-11-03  Regina Obe <lr@pcorp.us>
+2023-05-12  Sandro Santilli <strk@kbt.io>
 
-	* ci/berrie/configs.sh, ci/berrie64/configs.sh: Change berries to
-	test against 3.11 head (3.11.1)
+	* ci/github/run_coverage.sh: [gha] Enable verbosity on check step in
+	coverage test
 
-2022-11-03  Regina Obe <lr@pcorp.us>
+2023-05-12  Sandro Santilli <strk@kbt.io>
 
-	* NEWS, loader/shp2pgsql-core.c,
-	regress/loader/CharNoWidth.select.expected,
-	regress/loader/CharNoWidth.select.sql, regress/loader/tests.mk: 
-	Handle load of dbase character fields with not width specified
-	References #5280 for PostGIS 3.3.2
+	* postgis/Makefile.in: Encode dependency of postgis.sql on its
+	effective sources
 
-2022-11-03  Sandro Santilli <strk@kbt.io>
+2023-04-27  Paul Ramsey <pramsey@cleverelephant.ca>
 
-	* NEWS, liblwgeom/lwgeom_topo.c,
-	topology/test/regress/topogeo_addlinestring.sql,
-	topology/test/regress/topogeo_addlinestring_expected: Fix 2.5d
-	topology building regression (geometrically non-closed) References #5234 in 3.3 branch (3.3.2dev)
+	* NEWS, postgis/geography.sql.in: Retain SRID through
+	ST_Buffer(geography) call, references #5378
 
-2022-10-28  Sandro Santilli <strk@kbt.io>
+2023-04-26  Regina Obe <lr@pcorp.us>
 
-	* NEWS, liblwgeom/lwgeom_topo.c,
-	topology/test/regress/topogeo_addlinestring.sql,
-	topology/test/regress/topogeo_addlinestring_expected: Fix error in
-	topology import of self-intersecting rings References #5081 in 3.3 branch (3.3.2dev) Includes regression
-	testcase
+	* ci/winnie/build_postgis.sh, ci/winnie/package_postgis.sh,
+	ci/winnie/regress_postgis.sh: Revise winnie paths to support new
+	location of proj 8+
 
-2022-10-29  Regina Obe <lr@pcorp.us>
+2023-04-24  Regina Obe <lr@pcorp.us>
 
-	* regress/core/snaptogrid.sql, regress/core/snaptogrid_expected: 
-	Change test so also agrees on Arm.  References #5241 for PostGIS
-	3.3.2
+	* NEWS: add Laurenz Albe to PG16 news credits
 
-2022-10-29  Sandro Santilli <strk@kbt.io>
+2023-04-23  Regina Obe <lr@pcorp.us>
 
-	* extensions/postgis_raster/Makefile.in: Encode dependency of raster
-	unpackaged sql on create_unpackage.pl
+	* NEWS, postgis/lwgeom_union.c: Fix crash on ST_Union References
+	#5371 for PostGIS 3.3.3
 
-2022-10-29  Sandro Santilli <strk@kbt.io>
+2023-04-23  Regina Obe <lr@pcorp.us>
 
-	* utils/create_unpackaged.pl: Fix handling of multiline SQL defn in
-	unpackaged script creation
+	* .cirrus.yml, ci/bessie/postgis_regress.sh: FreeBSD bots - Turn off cirrus testing on 12.3 - Disable raster testing on bessie   (current issue with GDAL 3.6 pkg packaging)
 
-2022-10-27  Regina Obe <lr@pcorp.us>
+2023-04-22  Regina Obe <lr@pcorp.us>
 
-	* NEWS, liblwgeom/lwgeom.c, regress/core/snaptogrid.sql,
-	regress/core/snaptogrid_expected: Fix crash in ST_SnapToGrid on
-	Empties References #5241 for PostGIS 3.3.2
+	* liblwgeom/liblwgeom.h.in: Fix for PG 13 and below Evidentally
+	stdbool is not included in PG13 and below So added changes for
+	raster for PG16, broke PG 13 Closes
+	https://github.com/postgis/postgis/pull/716
 
-2022-10-27  Regina Obe <lr@pcorp.us>
+2022-12-13  Paul Ramsey <pramsey@cleverelephant.ca>
 
-	* ci/berrie64/postgis_regress.sh: Make Berrie64 stop on first error
+	* .github/workflows/ci.yml, .gitignore, NEWS,
+	extensions/address_standardizer/std_pg_hash.c,
+	libpgcommon/lwgeom_pg.c, libpgcommon/lwgeom_pg.h,
+	libpgcommon/shared_gserialized.c, postgis/flatgeobuf.c,
+	postgis/gserialized_gist_2d.c, postgis/gserialized_gist_nd.c,
+	postgis/gserialized_spgist_2d.c, postgis/lwgeom_box3d.c,
+	postgis/lwgeom_geos.c, postgis/lwgeom_triggers.c,
+	raster/rt_core/rt_band.c, raster/rt_pg/rtpg_band_properties.c,
+	raster/rt_pg/rtpg_gdal.c, raster/rt_pg/rtpg_inout.c,
+	raster/rt_pg/rtpg_mapalgebra.c, raster/rt_pg/rtpostgis.c,
+	raster/rt_pg/rtpostgis.h, regress/core/geos310.sql,
+	regress/core/geos310_expected, regress/core/geos312.sql,
+	regress/core/geos312_expected, regress/core/tests.mk.in,
+	regress/core/tickets.sql, regress/core/tickets_expected,
+	regress/core/union.sql: Support build on Pg16devel for PostGIS 3.3.3 Closes #5257 Closes #5261 Closes #5277 Closes #5308 Closes #5374
+	Closes https://github.com/postgis/postgis/pull/716
 
-2022-10-28  Sandro Santilli <strk@kbt.io>
+2023-04-21  Sandro Santilli <strk@kbt.io>
 
-	* Fix syntax of ownership check in extension packager "desc" is a reserved word
+	* Force C locale and libc provider in regress test db with PG15+ This is probably a workaround to a bug in PostgreSQL 16, but it
+	feels like the smallest change to fix #5375
 
