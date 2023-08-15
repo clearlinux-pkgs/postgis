@@ -1,3 +1,29 @@
+PostGIS 3.3.4
+2023/07/28
+
+* Bug Fixes and Enhancements *
+  - #5450, Fix macro expansion recursion on powerpc architectures.
+           (Bas Couwenberg)
+  - #5395, [postgis_topology] Allow unprivileged user dump
+           of database with topology enabled
+  - #5394, [postgis_topology] Improve robustness of finding
+           distinct vertices in topology edges (Sandro Santilli)
+  - #5403, [postgis_topology] Fix ValidateTopology(bbox) without
+           topology in search_path (Sandro Santilli)
+  - #5410, [postgis_raster] ST_Value bilinear resample,
+           don't throw an error if Band has no NODATA value
+           (Regina Obe)
+  - #5385, Postgres malloc assertion fail when
+           using pg_cancel_backend with ST_AsMVT
+           (Regina Obe, Paul Ramsey)
+  - #5452, Updated README.postgis for apt-based systems
+           (Jelte Fennema)
+
+* Breaking Changes *
+    - #5385, Take out interruptability of ST_AsMVT
+             as it causes backend crash under intense conditions
+            (Regina Obe, Paul Ramsey)
+
 PostGIS 3.3.3
 2023/05/29
 
@@ -33,7 +59,6 @@ PostGIS 3.3.3
   - #5378, ST_Buffer(geography) drops SRID (Paul Ramsey)
   - #5388, [postgis_tiger_geocoder] Fix faces table tiger_gload,
            caused census rerelease of faces data (Regina Obe)
-
 
 PostGIS 3.3.2
 2022/11/12

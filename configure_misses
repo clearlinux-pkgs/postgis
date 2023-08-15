@@ -1,12 +1,12 @@
 Configure miss: 32-bit host C ABI
 Configure miss: CFLocaleCopyPreferredLanguages
 Configure miss: dblatex
+Configure miss: gcc option to enable C++11 features
 Configure miss: iconvctl
 Configure miss: libiconv_open in -liconv
 Configure miss: libiconvctl
 Configure miss: main in -lc++
+Configure miss: pj_get_release in -lproj
 Configure miss: proj_api.h
-Configure miss: proj_api.h presence
-Configure miss: proj_api.h usability
 Configure miss: whether we are using Clang
 Configure miss: xml2pot
