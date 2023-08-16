@@ -1,97 +1,81 @@
-PostGIS 3.3.4
-2023/07/28
+PostGIS 3.4.0
+2023/08/15
 
-* Bug Fixes and Enhancements *
-  - #5450, Fix macro expansion recursion on powerpc architectures.
-           (Bas Couwenberg)
-  - #5395, [postgis_topology] Allow unprivileged user dump
-           of database with topology enabled
-  - #5394, [postgis_topology] Improve robustness of finding
-           distinct vertices in topology edges (Sandro Santilli)
-  - #5403, [postgis_topology] Fix ValidateTopology(bbox) without
-           topology in search_path (Sandro Santilli)
-  - #5410, [postgis_raster] ST_Value bilinear resample,
-           don't throw an error if Band has no NODATA value
-           (Regina Obe)
-  - #5385, Postgres malloc assertion fail when
-           using pg_cancel_backend with ST_AsMVT
-           (Regina Obe, Paul Ramsey)
-  - #5452, Updated README.postgis for apt-based systems
-           (Jelte Fennema)
+This version requires PostgreSQL 12-16, GEOS 3.6 or higher, and Proj 6.1+.
+To take advantage of all features, GEOS 3.12+ is needed.
+To take advantage of all SFCGAL featurs, SFCGAL 1.4.1+ is needed.
+
+Many thanks to our translation teams, in particular:
+
+Teramoto Ikuhiro (Japanese Team)
+Vincent Bre (French Team)
+
+There are 2 new ./configure switches:
+
+ -  --disable-extension-upgrades-install, will skip installing all the extension upgrade scripts except for the ANY--currentversion. If you use this, you can install select upgrades using the postgis commandline tool
+ -  --without-pgconfig, will build just the commandline tools
+    raster2pgsql and shp2pgsql even if PostgreSQL is not installed
+
+* New Features *
+  - #5055, complete manual internationalization (Sandro Santilli)
+  - #5052, target version support in postgis_extensions_upgrade
+    (Sandro Santilli)
+  - #5306, expose version of GEOS at compile time (Sandro Santilli)
+  - New install-extension-upgrades command in postgis script (Sandro Santilli)
+  - #5257, #5261, #5277, Support changes for PostgreSQL 16 (Regina Obe)
+  - #5006, GH705, ST_Transform: Support PROJ pipelines (Robert Coup, Koordinates)
+  - #5283, [postgis_topology] RenameTopology (Sandro Santilli)
+  - #5286, [postgis_topology] RenameTopoGeometryColumn (Sandro Santilli)
+  - GH703, [postgis_raster] Add min/max resampling as options (Christian Schroeder)
+  - #5336, [postgis_topology] topogeometry cast to topoelement support (Regina Obe)
+  - Allow singleton geometry to be inserted into Geometry(Multi*) columns (Paul Ramsey)
+  - GH721, New window-based ST_ClusterWithinWin and ST_ClusterIntersectingWin (Paul Ramsey)
+  - #5397, [address_standardizer] debug_standardize_address function (Regina Obe)
+  - #5373, ST_LargestEmptyCircle, exposes extra semantics on circle finding
+    Requires GEOS 3.9+ (Martin Davis)
+  - #5267, ST_Project signature for geometry, and two-point signature (Paul Ramsey)
+  - #5267, ST_LineExtend for extending linestrings (Paul Ramsey)
+  - New coverage functions ST_CoverageInvalidEdges, ST_CoverageSimplify, ST_CoverageUnion (Paul Ramsey)
+
+
+* Enhancements *
+  - #5194, do not update system catalogs from postgis_extensions_upgrade (Sandro Santilli)
+  - #5092, reduce number of upgrade paths installed on system,
+           by providing an ANY intermediary path that all upgrades will
+           go thru (Sandro Santilli)
+  - #635, honour --bindir (and --prefix) configure switch for executables (Sandro Santilli)
+  - Honour --mandir (and --prefix) configure switch for man pages install path (Sandro Santilli)
+  - Honour --htmldir (and --docdir and --prefix) configure switch for
+    html pages install path (Sandro Santilli)
+  - [postgis_topology] Speed up check of topology faces without edges (Sandro Santilli)
+  - [postgis_topology] Speed up coincident nodes check in topology validation  (Sandro Santilli)
+  - GH718, ST_QuantizeCoordinates(): speed-up implementation (Even Rouault)
+  - Repair spatial planner stats to use computed selectivity for contains/within queries (Paul Ramsey)
+  - GH734, Additional metadata on Proj installation in postgis_proj_version (Paul Ramsey)
+  - #5177, Allow building tools without PostgreSQL server headers (Sandro Santilli)
+  - #5447, Manual pages added for postgis and postgis_restore utilities
+    (Sandro Santilli)
+  - ST_Project signature for geometry, and two-point signature (Paul Ramsey)
+  - #4913, ST_AsSVG support for curve types CircularString, CompoundCurve, MultiCurve,
+           and MultiSurface (Regina Obe)
+  - #5266, #5460 ST_ClosestPoint, ST_ShortestLine support for geography type
+    (MobilityDB Esteban Zimanyi, Maxime Schoemans, Paul Ramsey)
 
 * Breaking Changes *
-    - #5385, Take out interruptability of ST_AsMVT
-             as it causes backend crash under intense conditions
-            (Regina Obe, Paul Ramsey)
-
-PostGIS 3.3.3
-2023/05/29
-
-* Bug Fixes and Enhancements *
-  - #5384, Fix crash in ST_AsGML when given id is longer than given prefix
-           (Sandro Santilli)
-  - #5380, Fix 2.5 upgrades with views using geography based ST_Distance
-           (Sandro Santilli)
-  - #5303, Don't try removing closed edges endpoint from
-           RemoveUnusedPrimitives (Sandro Santilli)
-  - #5289, Fix misleading message in RemoveUnusedPrimitives about
-           doubly connected edges healing (Sandro Santilli)
-  - #5298, Fix CopyTopology exception with hierarchical layers (Sandro Santilli)
-  - #5299, Corrections to address_standardizer_data_us lex (Regina Obe)
-  - #5106, Fix segfault in ST_RemEdgeNewFace/ST_RemEdgeModFace
-           when no edge side-faces are found (Sandro Santilli)
-  - #5329, Fix downgrade protection introduced in 3.3.0 (Sandro Santilli)
-  - #5332, Keep proj errors from percolating into PgSQL log (Paul Ramsey)
-  - #5313, Fix memory access issue in ST_InterpolateRaster (Paul Ramsey)
-  - #5338, Dump/Restore of raster table fails on
-           enforce_coverage_tile_rast constraint (Regina Obe)
-  - #5315, #5318, #5319, #5320, #5342 crashes on infinite coordinates
-          (Regina Obe, Paul Ramsey)
-  - #5344, Include topology id sequence state in dumps (Sandro Santilli)
-  - #5288, ST_LineCrossingDirection multi-cross error (Paul Ramsey)
-  - #5347, _ST_BestSRID crashes on ARM with infinite geometries (Regina Obe)
-  - #5331, [postgis_tiger_geocoder] reverse_geocode, prefer addressable ranges
-          (Regina Obe, Locance)
-  - #5363, Make ST_ClusterDBScan interruptable (Paul Ramsey)
-  - #5257, #5261, #5277, #5304, #5308, #5374, Support for PG16
-          (Paul Ramsey, Regina Obe, Sandro , Laurenz Albe)
-  - #5371, ST_Union segfaults (PG 11-12) (Regina Obe)
-  - #5378, ST_Buffer(geography) drops SRID (Paul Ramsey)
-  - #5388, [postgis_tiger_geocoder] Fix faces table tiger_gload,
-           caused census rerelease of faces data (Regina Obe)
-
-PostGIS 3.3.2
-2022/11/12
-This version requires PostgreSQL 11-15, GEOS 3.6 or higher, and Proj 5.2+
-Additional features are enabled if you are running GEOS 3.9+
- (and ST_MakeValid enhancements with 3.10+),
-Proj 6.1+, and PostgreSQL 15+.
-
-* Bug and Security Fixes *
-  - #5248, Marc21 documentation missing (Regina Obe)
-  - #5240, ST_DumpPoints and ST_DumpSegments crash with empty polygon (Regina Obe)
-  - [security] Add schema qual to upgrade util (Regina Obe)
-  - #5255, GH598, Remove forced static linking on shp2pgsql, pgsql2shp (Maxim Kochetkov)
-  - #5255, GH702, Remove forced static linking on raster2pgsql (Thomas Petazzoni)
-  - #4648, [security] Check function ownership at extension packaging time (Sandro Santilli)
-           Thanks to Sven Klemm (Timescale) for the report
-  - #5241, Crash on ST_SnapToGrid with empty multis (Regina Obe)
-  - #5081, Fix error in topology import of self-intersecting rings (Sandro Santilli)
-  - #5234, Fix 2.5d topology building regression (Sandro Santilli)
-  - #5280, Handle load of dbase character fields with no width specified (Regina Obe)
-  - #5264, Fix topology install on Alpine (Louis Descoteaux)
-  - #5244, postgis_tiger_geocoder update for TIGER 2022 (Regina Obe)
-  - #5285, Fix import/export of topologies with names needing quotes (Sandro Santilli)
-  - #4988, SFCGAL specify name of unknown type when SFCGAL can't process (Regina Obe)
-  - #5084, Bad rasterization of linestring (Gilles Vuidel)
-
-
-PostGIS 3.3.1
-2022/09/09
-
- * Bug Fix *
-  - #5227, typo in ST_LineLocatePoint error message (Sandro Santilli)
-  - #5231, PG15 no longer compiles because SQL/JSON removed PG upstream (Regina Obe)
+  - #5229, Drop support for Proj < 6.1 and PG 11 (Regina Obe)
+  - #5306, GH734, postgis_full_version() and postgis_proj_version()
+    now output more information about proj network configuration
+    and data paths. GEOS compile-time version
+    also shown if different from run-time
+    (Paul Ramsey, Sandro Santilli)
+ - #5447, postgis_restore.pl renamed to postgis_restore
+ (Sandro Santilli)
+ - Utilities now installed in OS bin or
+   user specified --bindir and --prefix
+   instead of postgresql bin
+   and extension stripped except on windows
+   (postgis, postgis_restore, shp2pgsql, raster2pgsql, pgsql2shp,
+   pgtopo_import, pgtopo_export)
 
 PostGIS 3.3.0
 2022/08/26
