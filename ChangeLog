@@ -1,112 +1,98 @@
-2023-08-15  Regina Obe <lr@pcorp.us>
+2023-11-20  Regina Obe <lr@pcorp.us>
 
-	* NEWS: Prepare for 3.4.0 release
+	* NEWS, doc/release_notes.xml: More Prep 3.4.1
 
-2023-08-14  Regina Obe <lr@pcorp.us>
+2023-11-20  Regina Obe <lr@pcorp.us>
 
-	* Version.config: Flip 3.4 to 3.4.0
+	* doc/reference_raster.xml: Remove invalid doc note on
+	ST_SetBandPath.  Closes #5609 for PostGIS 3.4.1
 
-2023-08-14  Regina Obe <lr@pcorp.us>
+2023-11-20  Regina Obe <lr@pcorp.us>
 
-	* NEWS, README.postgis, doc/release_notes.xml: Prepping for 3.4.0rc4
-	release
+	* liblwgeom/measures.c: Fix ST_Project lon,lon issue. Closes #5581
+	for PostGIS 3.4.1
 
-2023-08-14  Regina Obe <lr@pcorp.us>
+2023-11-20  Regina Obe <lr@pcorp.us>
 
-	* NEWS, Version.config: Prepping for PostGIS 3.4.0rc4
+	* doc/reference_editor.xml: Fix ST_LineExtend example references
+	#5594 for PostGIS 3.4.1
 
-2023-08-14  Regina Obe <lr@pcorp.us>
+2023-11-20  Regina Obe <lr@pcorp.us>
 
-	* doc/Makefile.in: distclean localize patch from Bas Couwenberg
-	Closes #5477 for PostGIS 3.4.0rc4
+	* Version.config, doc/introduction.xml, doc/release_notes.xml,
+	extensions/upgradeable_versions.mk: Prep for PostGIS 3.4.1 release
 
-2023-08-14  Regina Obe <lr@pcorp.us>
+2023-11-20  Regina Obe <lr@pcorp.us>
 
-	* NEWS, Version.config, extensions/upgradeable_versions.mk: Flip
-	back to dev in case we need to have another rc
+	* NEWS, libpgcommon/sql/AddToSearchPath.sql.inc: Regression failure
+	when installed by non-superuser Closes #5525 for PostGIS 3.4.1
 
-2023-08-14  Regina Obe <lr@pcorp.us>
+2023-11-13  Sandro Santilli <strk@kbt.io>
 
-	* README.md: Update ci statuses to follow 3.4 ci branches
+	* NEWS: Add NEWS item about --without-gui
 
-2023-08-13  Regina Obe <lr@pcorp.us>
+2023-11-13  Sandro Santilli <strk@kbt.io>
 
-	* extensions/address_standardizer/Makefile.in,
-	extensions/postgis/Makefile.in,
-	extensions/postgis_raster/Makefile.in,
-	extensions/postgis_sfcgal/Makefile.in,
+	* NEWS, postgis/mvt.c: Fix uninizialized variable in MVT Closes #5558 in 3.4 branch (3.4.1dev)
+
+2023-11-11  Regina Obe <lr@pcorp.us>
+
+	* ci/winnie/winnie_common.sh, doc/postgis.xml: GEOS 3.12.1 - Flip winnie's build versions to latest GEOS 3.12.1 - Set PostGIS GEOS last_geos_release_version to 3.12.1
+
+2023-11-11  Regina Obe <lr@pcorp.us>
+
+	* NEWS, doc/installation.xml,
 	extensions/postgis_tiger_geocoder/Makefile.in,
-	extensions/postgis_topology/Makefile.in: Wrong syntax for ifdef in
-	prior commit References #5476 References #5469 Closes
-	https://git.osgeo.org/gitea/postgis/postgis/pulls/137
+	extras/tiger_geocoder/tiger_loader_2023.sql:  Changes to load tiger 2023 data Closes #5603 for PostGIS 3.4.1
 
-2023-08-13  Regina Obe <lr@pcorp.us>
+2023-11-10  Regina Obe <lr@pcorp.us>
 
-	* extensions/address_standardizer/Makefile.in,
-	extensions/postgis/Makefile.in,
-	extensions/postgis_raster/Makefile.in,
-	extensions/postgis_sfcgal/Makefile.in,
-	extensions/postgis_tiger_geocoder/Makefile.in,
-	extensions/postgis_topology/Makefile.in: MKDIR_P only override if
-	it's not empty Closes #5469 for PostGIS 3.4.0rc3 Closes #5476 for PostGIS 3.4.0rc3
+	* NEWS, regress/core/regress_buffer_params.sql,
+	regress/core/regress_buffer_params_expected: Fix regress issues with
+	GEOS 3.13.  Closes #5605 for PostGIS 3.4.1
 
-2023-08-13  Regina Obe <lr@pcorp.us>
+2023-10-27  Regina Obe <lr@pcorp.us>
 
-	* NEWS, doc/release_notes.xml: Put in news the two new configure
-	switches  - --disable-extension-upgrades-install  - --without-pgconfig
+	* NEWS, extensions/address_standardizer/address_standardizer.c: 
+	Address standardizer cleanup  - Replace macro string with StringInfo     in debug_address_standardizer     and address_standardiser functions  References #5535 for PostGIS 3.4.1
 
-2023-08-13  Regina Obe <lr@pcorp.us>
+2023-10-31  Regina Obe <lr@pcorp.us>
 
-	* ci/winnie/build_postgis.sh, ci/winnie/winnie_common.sh: Winnie
-	build changes:  - Standardize on 0 or 1 for INCLUDE_MINOR_LIB  - Set tagged builds to always be INCLUDE_MINOR_LIB=0    Others will default to INCLUDE_MINOR_LIB=1 or can be overwritten
+	* doc/reference_sfcgal.xml: Fix ST_AlphaShape examples, per Dapeng
+	Wang observations
 
-2023-08-13  Regina Obe <lr@pcorp.us>
+2023-10-30  Regina Obe <lr@pcorp.us>
 
-	* Version.config: Prep for PostGIS 3.4.0rc3
+	* README.postgis, ci/winnie/package_postgis.sh,
+	doc/installation.xml: Update to new home of sfcgal. References #5600
+	for PostGIS 3.4.1
 
-2023-08-13  Sandro Santilli <strk@kbt.io>
+2023-10-30  Sandro Santilli <strk@kbt.io>
 
-	* doc/Makefile.in: Install man pages on `make install` Closes #5475 in 3.4 branch
+	* extensions/Makefile.in: Fix distclean Thanks gitlab-ci for catching this:
+	https://gitlab.com/postgis/postgis/-/jobs/5389961540#L4275
 
-2023-08-12  Regina Obe <lr@pcorp.us>
+2023-10-27  Sandro Santilli <strk@kbt.io>
 
-	* raster/Makefile.in: Prevent infinite loop when building
-	--without-pgconfig Closes #5473 for PostGIS 3.4.0
+	* regress/run_test.pl: run_test.pl: fix extension upgrades to 3.3
+	targets It was 3.4.0 introducing the ANY intermediate path, not 3.3.0 References #5591 in 3.4 branch (3.4.1dev)
 
-2023-08-11  Regina Obe <lr@pcorp.us>
+2023-10-26  Sandro Santilli <strk@kbt.io>
 
-	* .drone-1.0.yml, .woodpecker/tools.yml, Version.config,
-	ci/dronie/postgis_tools.sh, doc/po/de/release_notes.xml.po,
-	doc/po/es/release_notes.xml.po, doc/po/fr/release_notes.xml.po,
-	doc/po/it_IT/release_notes.xml.po, doc/po/ja/release_notes.xml.po,
-	doc/po/ja/xsl-config.xml.po, doc/po/ko_KR/release_notes.xml.po,
-	doc/po/pl/release_notes.xml.po, doc/po/pt_BR/release_notes.xml.po,
-	doc/po/ru/release_notes.xml.po,
-	doc/po/templates/release_notes.xml.pot, doc/release_notes.xml: More
-	prep for release  - Remove tools from dronie, she's acting weird too  - Put tools back on woodie  - Move tools steps to dronie/postgis_tools.sh    so can be easily tested outside of dronie/woodie
+	* libpgcommon/sql/AddToSearchPath.sql.inc: Use function-specific
+	search_path to improve readability
 
-2023-08-11  Regina Obe <lr@pcorp.us>
+2023-10-26  Sandro Santilli <strk@kbt.io>
 
-	* .drone-1.0.yml, ci/dronie/postgis_tools.sh: Move dronie tool steps
-	to dedicated script
+	* NEWS, topology/topology.sql.in: Fix script-based load of topology
+	by qualifying refs to TopoGeometry Closes #5590 in 3.4 branch (3.4.1dev)
 
-2023-08-11  Regina Obe <lr@pcorp.us>
+2023-10-26  Sandro Santilli <strk@kbt.io>
 
-	* .drone-1.0.yml: Change pull to never for tools like others for
-	dronie
+	* extensions/Makefile.in, topology/Makefile.in: Encode dependencies
+	on libpgcommon/sql/AddToSearchPath.sql
 
-2023-08-11  Regina Obe <lr@pcorp.us>
+2023-10-26  Sandro Santilli <strk@kbt.io>
 
-	* .woodpecker/tools.yml: Maybe needs a -
-
-2023-08-11  Regina Obe <lr@pcorp.us>
-
-	* .drone-1.0.yml, .woodpecker/tools.yml: Try to avoid using woodie
-	for tool testing because for some reason crashes on tool testing which sometimes
-	kills the woodie-server if agent is running there - Add tool testing to dronie (see if it crashes) - For now set when to pull request on woodie to disable tools
-	testing
-
-2023-08-11  Regina Obe <lr@pcorp.us>
-
-	* PREPPING FOR 3.4.0rc2 release  - Update pos and pots  - Clarify some items in NEWS  - Get rid of betas and rcs in extension upgrade
+	* Backport run_test.pl from master branch
 
