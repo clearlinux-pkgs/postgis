@@ -8,7 +8,7 @@
 %define keepstatic 1
 Name     : postgis
 Version  : 3.4.1
-Release  : 25
+Release  : 26
 URL      : https://download.osgeo.org/postgis/source/postgis-3.4.1.tar.gz
 Source0  : https://download.osgeo.org/postgis/source/postgis-3.4.1.tar.gz
 Summary  : No detailed summary available
