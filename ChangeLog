@@ -1,98 +1,106 @@
-2023-11-20  Regina Obe <lr@pcorp.us>
+2024-02-08  Paul Ramsey <pramsey@cleverelephant.ca>
 
-	* NEWS, doc/release_notes.xml: More Prep 3.4.1
+	* NEWS, README.postgis, Version.config, doc/release_notes.xml: 
+	Prepare for 3.4.2 release
 
-2023-11-20  Regina Obe <lr@pcorp.us>
+2024-02-07  Sandro Santilli <strk@kbt.io>
 
-	* doc/reference_raster.xml: Remove invalid doc note on
-	ST_SetBandPath.  Closes #5609 for PostGIS 3.4.1
+	* configure.ac: Improve error message for bogus argument to
+	--with-gdalconfig
 
-2023-11-20  Regina Obe <lr@pcorp.us>
+2024-01-31  Paul Ramsey <pramsey@cleverelephant.ca>
 
-	* liblwgeom/measures.c: Fix ST_Project lon,lon issue. Closes #5581
-	for PostGIS 3.4.1
+	* NEWS, postgis/lwgeom_in_gml.c, postgis/lwgeom_in_kml.c,
+	postgis/lwgeom_in_marc21.c, regress/core/in_gml.sql: Change XML
+	parsing to use default (SAX2) parser, references #5662
 
-2023-11-20  Regina Obe <lr@pcorp.us>
+2024-01-23  Paul Ramsey <pramsey@cleverelephant.ca>
 
-	* doc/reference_editor.xml: Fix ST_LineExtend example references
-	#5594 for PostGIS 3.4.1
+	* NEWS, liblwgeom/measures.c: Do full ring check always in line/poly
+	maxdist mode, references #5639
 
-2023-11-20  Regina Obe <lr@pcorp.us>
+2024-01-11  Paul Ramsey <pramsey@cleverelephant.ca>
 
-	* Version.config, doc/introduction.xml, doc/release_notes.xml,
-	extensions/upgradeable_versions.mk: Prep for PostGIS 3.4.1 release
+	* NEWS, liblwgeom/measures3d.c: Handle empty collection components
+	in 3d distance, references #5580
 
-2023-11-20  Regina Obe <lr@pcorp.us>
+2024-01-11  Sandro Santilli <strk@kbt.io>
 
-	* NEWS, libpgcommon/sql/AddToSearchPath.sql.inc: Regression failure
-	when installed by non-superuser Closes #5525 for PostGIS 3.4.1
+	* .woodpecker/regress.yml: woodie: run all tests with
+	standard_conforming_strings=off We'll leave standard_conforming_strings=on (default) testing to
+	other bots References #5633 in 3.4 branch (3.4.2dev)
 
-2023-11-13  Sandro Santilli <strk@kbt.io>
+2024-01-11  Sandro Santilli <strk@kbt.io>
 
-	* NEWS: Add NEWS item about --without-gui
+	* NEWS, postgis/postgis_letters.sql, raster/rt_pg/rtpostgis.sql.in,
+	regress/core/in_flatgeobuf.sql, regress/core/mvt.sql,
+	regress/core/tickets.sql, regress/core/wkb.sql,
+	sfcgal/regress/regress_sfcgal.sql: Use escaped string or set
+	standard_conforming_strings=on References #5633 in 3.4 branch (3.4.2dev)
 
-2023-11-13  Sandro Santilli <strk@kbt.io>
+2024-01-10  Paul Ramsey <pramsey@cleverelephant.ca>
 
-	* NEWS, postgis/mvt.c: Fix uninizialized variable in MVT Closes #5558 in 3.4 branch (3.4.1dev)
+	* NEWS, postgis/lwgeom_functions_analytic.c: Crash on collections
+	with empty members, references #5646
 
-2023-11-11  Regina Obe <lr@pcorp.us>
+2024-01-10  Regina Obe <lr@pcorp.us>
 
-	* ci/winnie/winnie_common.sh, doc/postgis.xml: GEOS 3.12.1 - Flip winnie's build versions to latest GEOS 3.12.1 - Set PostGIS GEOS last_geos_release_version to 3.12.1
+	* libpgcommon/lwgeom_pg.c: Revert #5648 fix Causing regression
+	failures on PG16 and PG17 References #5648 and #5650
 
-2023-11-11  Regina Obe <lr@pcorp.us>
+2024-01-09  Paul Ramsey <pramsey@cleverelephant.ca>
 
-	* NEWS, doc/installation.xml,
-	extensions/postgis_tiger_geocoder/Makefile.in,
-	extras/tiger_geocoder/tiger_loader_2023.sql:  Changes to load tiger 2023 data Closes #5603 for PostGIS 3.4.1
+	* NEWS: Update news to reflect #5647
 
-2023-11-10  Regina Obe <lr@pcorp.us>
+2024-01-09  Paul Ramsey <pramsey@cleverelephant.ca>
 
-	* NEWS, regress/core/regress_buffer_params.sql,
-	regress/core/regress_buffer_params_expected: Fix regress issues with
-	GEOS 3.13.  Closes #5605 for PostGIS 3.4.1
+	* postgis/lwgeom_geos.c, regress/core/tickets.sql,
+	regress/core/tickets_expected: Handle empty components of MULTIPOINT
+	in native point-in-polygon routines, references #5647
 
-2023-10-27  Regina Obe <lr@pcorp.us>
+2024-01-08  Paul Ramsey <pramsey@cleverelephant.ca>
 
-	* NEWS, extensions/address_standardizer/address_standardizer.c: 
-	Address standardizer cleanup  - Replace macro string with StringInfo     in debug_address_standardizer     and address_standardiser functions  References #5535 for PostGIS 3.4.1
+	* doc/reference_guc.xml: Clarify documentation page typos regarding
+	gdal_vsi_options, references #5653
 
-2023-10-31  Regina Obe <lr@pcorp.us>
+2024-01-08  Paul Ramsey <pramsey@cleverelephant.ca>
 
-	* doc/reference_sfcgal.xml: Fix ST_AlphaShape examples, per Dapeng
-	Wang observations
-
-2023-10-30  Regina Obe <lr@pcorp.us>
-
-	* README.postgis, ci/winnie/package_postgis.sh,
-	doc/installation.xml: Update to new home of sfcgal. References #5600
-	for PostGIS 3.4.1
+	* configure.ac, liblwgeom/cunit/Makefile.in,
+	liblwgeom/lwgeodetic.c, loader/Makefile.in,
+	raster/loader/Makefile.in: Fix MacOS linking issues in 3.4 branch
 
 2023-10-30  Sandro Santilli <strk@kbt.io>
 
-	* extensions/Makefile.in: Fix distclean Thanks gitlab-ci for catching this:
-	https://gitlab.com/postgis/postgis/-/jobs/5389961540#L4275
+	* regress/core/regress.sql: Give more detail about unexpected
+	functions ownership
 
-2023-10-27  Sandro Santilli <strk@kbt.io>
+2023-12-27  Sandro Santilli <strk@kbt.io>
 
-	* regress/run_test.pl: run_test.pl: fix extension upgrades to 3.3
-	targets It was 3.4.0 introducing the ANY intermediate path, not 3.3.0 References #5591 in 3.4 branch (3.4.1dev)
+	* regress/core/regress.sql: More escaped string usage (regress
+	tests) References #5633
 
-2023-10-26  Sandro Santilli <strk@kbt.io>
+2023-12-28  Sandro Santilli <strk@kbt.io>
 
-	* libpgcommon/sql/AddToSearchPath.sql.inc: Use function-specific
-	search_path to improve readability
+	* .woodpecker/regress.yml: [woodie] Do not test with unprivileged
+	user References #5651 in 3.4 branch
 
-2023-10-26  Sandro Santilli <strk@kbt.io>
+2023-12-28  Sandro Santilli <strk@kbt.io>
 
-	* NEWS, topology/topology.sql.in: Fix script-based load of topology
-	by qualifying refs to TopoGeometry Closes #5590 in 3.4 branch (3.4.1dev)
+	* .woodpecker/regress.yml: [woodie] Disable pgextwlist, broken for
+	unknown reason at this point
 
-2023-10-26  Sandro Santilli <strk@kbt.io>
+2023-12-28  Sandro Santilli <strk@kbt.io>
 
-	* extensions/Makefile.in, topology/Makefile.in: Encode dependencies
-	on libpgcommon/sql/AddToSearchPath.sql
+	* .woodpecker/regress.yml: [woodie] drop double-upgrade and
+	locked-upgrade tests (unsupported)
 
-2023-10-26  Sandro Santilli <strk@kbt.io>
+2023-12-27  Sandro Santilli <strk@kbt.io>
 
-	* Backport run_test.pl from master branch
+	* regress/hooks/configure-pgextwlist.sql: Add
+	configure-pgextwlist.sql regression test hook This was needed since previous commit
+	f73b0aec3ffdf39115228695706e62d1db9dc57d
+
+2023-12-27  Sandro Santilli <strk@kbt.io>
+
+	* Have woodie test with standard_conforming_strings off too Copies the regress woodie workflow from master branch References #5633 in 3.4 branch (3.4.2dev)
 

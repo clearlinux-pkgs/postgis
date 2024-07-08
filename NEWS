@@ -1,8 +1,30 @@
-PostGIS 3.4.1
-2023/11/19
+PostGIS 3.4.2
+2024/02/08
+
 This version requires PostgreSQL 12-16, GEOS 3.6 or higher, and Proj 6.1+.
 To take advantage of all features, GEOS 3.12+ is needed.
 To take advantage of all SFCGAL featurs, SFCGAL 1.4.1+ is needed.
+
+* Bug Fixes *
+
+ - #5633, Fix load, upgrade and usage with standard_conforming_strings
+          set to off (Sandro Santilli, Regina Obe)
+ - #5571, Memory over-allocation for narrow inputs (Paul Ramsey)
+ - #5610, Regression fix: Allow Nan and infinity again
+          in ST_SetPoint (Regina Obe)
+ - #5627, #5647, Handling of EMPTY components in PiP check (Paul Ramsey)
+ - #5629, Handling EMPTY components in repeated point removal (Paul Ramsey)
+ - #5604, Handle distance between collections with empty elements (Paul Ramsey)
+ - #5635, Handle NaN points in ST_Split (Regina Obe)
+ - #5648, postgis_raster upgrade fails on PG16 (Ronan Dunklau)
+ - #5646, Crash on collections with empty members (Paul Ramsey)
+ - #5580, Handle empty collection components in 3d distance (Paul Ramsey)
+ - #5639, ST_DFullyWithin line/poly error case (Paul Ramsey)
+ - #5662, Change XML parsers to SAX2 (Paul Ramsey)
+
+
+PostGIS 3.4.1
+2023/11/19
 
 * Bug Fixes *
 
